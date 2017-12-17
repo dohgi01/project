@@ -1,0 +1,12 @@
+* {margin:0; padding:0;}
+/*배경색 전용*/
+.login-bg { 
+    height:100vh; overflow:hidden;
+    background-color:#eee;
+}
+/* margin 있는 부분이 잘리기 때문에, overflow : hidden 추가*/
+
+.login { width:360px; margin:100px auto 0; padding:20px;
+    border:1px solid #ddd; border-radius:5px;
+    background-color:#fff;
+}
