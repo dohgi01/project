@@ -25,7 +25,7 @@ app.post('/login', function(req, res){
         if(idcheck[0].userpass === pass){
             res.json({success : 1, message : 'login success'});
         } else {
-            res.json({success : -1, message : 'no match password'});
+            res.json({error : -1, message : 'no match password'});
         }
         
     } else {
@@ -33,6 +33,11 @@ app.post('/login', function(req, res){
     }
 });
 
+const companyList = require('./data'); //내보낸 data.js의 내용을 가져오기
+
+app.get('/company', function(req,res){
+    res.json(companyList); ///compnay의 경로로 들어가면 이 데이터를 전달해준다.
+})
 
 
 const server = app.listen(4000);

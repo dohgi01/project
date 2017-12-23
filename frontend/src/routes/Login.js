@@ -32,7 +32,7 @@ class Login extends Component {
         // 데이터가 보내진다.
         axios.post('http://localhost:4000/login', { 
             username : this.state.username, userpass : this.state.userpass})
-        .then((response)=>{ // 그러고나서 응답한다
+        .then( (response)=>{ // 그러고나서 응답한다
 //            console.log(response.data); //cmd console 로그에 응답한 데이터를 보여준다
             let { success, error } = response.data;
             let { history } = this.props;
@@ -42,11 +42,11 @@ class Login extends Component {
             } else if(success === 2) {
                 history.push('/register');
             } else if(error === -1){ // 에러... success === -1 는 안됨.
+                alert('비밀번호가 맞지 않습니다.');
                 return;
             }
         })
     }
-    
     render(){
         return(
             <div className="login-bg">
