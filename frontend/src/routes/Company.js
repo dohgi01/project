@@ -21,12 +21,15 @@ class Company extends Component {
 //                { company : 'XHIFT', recuit : "웹 프론트엔드 개발자", rebate : 1000000, recom : 26, favorite : 0},
                 
                 // 이 내용은 없고 백엔드에서 데이터 받아오기
-            ] 
+            ],
+            type : '전체'
         
         }
+        
+        this.handleClick = this.handleClick.bind(this);
+        this.handleCategory = this.handleCategory.bind(this);
     }
-   
-    
+
     
     componentDidMount(){
         
@@ -41,26 +44,63 @@ class Company extends Component {
         });
             
     }
+    
+    handleClick(company_id){
+        console.log(company_id);
+        
+        this.props.history.push(`/company/${company_id}`);//뒤로가기를 위해 history 쌓아놓기)
+    }
+
+    handleCategory(e){
+        this.setState({type:e.target.innerHTML});
+    }
 
     
-
     render(){
+        const { wanted, type } = this.state;
         
-        const { wanted } = this.state;
-        const list = wanted.map(function(v){
+        const newArray = wanted.filter( (v) => {
+            if( type === '전체'){
+                return v;
+            }
+            return v.type === type;
+
+        })
+        
+    
+        console.log(newArray);
+        
+        
+        const list = wanted.map( (v) => {
             return (
 
-                <Card key={v.id} company={v.name} recuit={v.recruit} rebate={v.rebate}
-                         recom={v.recommendation} favorite={v.favorite}/>
+                <Card
+                    cardLink = {this.handleClick}
+                    key={v.id}
+                    company_id ={v.id}
+                    
+                    company={v.name} recuit={v.recruit} rebate={v.rebate}
+                    recom={v.recommendation} favorite={v.favorite}/>
                    );
+
         })
 
         return(
-            <div className="container">
-                {list}
-            </div>
+            <div>
+                <ul className="category">
+                    <li onClick={this.handleCategory}>전체</li>
+                    <li onClick={this.handleCategory}>프론트엔드개발자</li>
+                    <li onClick={this.handleCategory}>백엔드개발자</li>
+                    <li onClick={this.handleCategory}>앱개발자</li>
+                </ul>
+                <div className="container">
+                    {list}
+                </div>
+           </div>
         );
     }
 }
 
 export default Company;
+
+

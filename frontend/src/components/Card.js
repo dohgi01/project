@@ -12,15 +12,16 @@ const Card = (props) => {
     }
     return (
         <div className="list">
-            <div className="card">
+            <div className="card"
+                onClick = { ()=> { props.cardLink(props.company_id)} }>
                         <div className="thums">
                             <div className="img"></div>
                             <div className="logo"></div>
                         </div>
                         <div className="info">
-                            <h3>{props.recuit}</h3>
-                            <div className="company">{props.company}</div>
-                            <div className="rebate">채용보상금 {props.rebate.toLocaleString('en')} 원</div>
+                            <h3 className="hide">{props.recuit}</h3>
+                            <div className="company hide">{props.company}</div>
+                            <div className="rebate hide">채용보상금 {props.rebate.toLocaleString('en')} 원</div>
                         </div>
                         <div className="opt">
                             <div className="recom">
